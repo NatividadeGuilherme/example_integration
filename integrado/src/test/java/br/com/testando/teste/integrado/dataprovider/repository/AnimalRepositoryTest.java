@@ -9,11 +9,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import br.com.testando.teste.integrado.dataprovider.model.Animal;
 
-@ExtendWith(MockitoExtension.class)
+@ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class AnimalRepositoryTest {
 
@@ -26,14 +27,14 @@ public class AnimalRepositoryTest {
 		
 		animalRepository.save(animal);
 		
-		
 		List<Animal> animais = animalRepository.findAll();
 		
 		assertEquals(1, animais.size());
+		assertEquals("Calopsita", animais.get(0).getNome());
 	}
 	
 	@Test
-	public void verificaSeTemAnimais() {
+	public void verificaQueNaoTemAnimais() {
 		assertEquals(0, animalRepository.findAll().size());
 	}
 }
